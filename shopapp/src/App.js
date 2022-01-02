@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import ProductCard from "./components/ProductCard";
 import ProductList from "./ProductList";
+import Navbar from "./components/Navbar";
 
 function App() {
   const [products, setProdcuts] = useState(ProductList);
@@ -16,7 +17,12 @@ function App() {
     />
   ));
 
-  return <div className="container">{listOfProducts}</div>;
+  return (
+    <div className="container">
+      <Navbar />
+      {listOfProducts}
+    </div>
+  );
 }
 
 export default App;
