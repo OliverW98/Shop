@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import ProductCard from "./components/ProductCard";
 import ProductList from "./ProductList";
 import Navbar from "./components/Navbar";
+import Basket from "./components/Basket";
 
 function App() {
   const [products, setProdcuts] = useState(ProductList);
@@ -20,7 +21,12 @@ function App() {
   return (
     <div className="container">
       <Navbar />
-      {listOfProducts}
+      <div className="columns">
+        <div className="column is-three-quarters">{listOfProducts}</div>
+        <div className="column">
+          <Basket />
+        </div>
+      </div>
     </div>
   );
 }
