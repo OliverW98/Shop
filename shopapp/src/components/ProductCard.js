@@ -1,4 +1,7 @@
+import React, { useState } from "react";
 function ProductCard(props) {
+  const [quantity, setQuantity] = useState(1);
+
   return (
     <div className="box">
       <div className="media">
@@ -13,13 +16,23 @@ function ProductCard(props) {
         </div>
         <div className="media-right">
           <div className="field">
-            <button className="button is-primary is-outlined is-rounded">
+            <button
+              type="submit"
+              className="button is-primary is-outlined is-rounded"
+              onClick={() => props.addToBasket(props.title, quantity)}
+              name={props.title}
+            >
               Add to Basket
             </button>
-          </div>
-          <div className="field">
+            <br />
             <label className="label">Quantity :</label>
-            <input className="number" type="number" min="1" />
+            <input
+              className="number"
+              type="number"
+              min="1"
+              onChange={(e) => setQuantity(e.target.value)}
+              value={quantity}
+            />
           </div>
         </div>
       </div>
