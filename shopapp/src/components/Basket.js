@@ -1,16 +1,20 @@
-import React, { useEffect } from "react";
+import React from "react";
 function Basket(props) {
-  useEffect(() => {
-    console.log(props.basket);
-  }, [props.basket]);
+  const basketList = props.basket.map((item, index) => (
+    <p key={index}>
+      {item.title} X {item.quantity}
+    </p>
+  ));
 
-  // const basketList = props.basket.forEach((item) => {
-  //   return (
-  //     <p>
-  //       {item.title} X {item.quantity}
-  //     </p>
-  //   );
-  // });
+  function getTotal() {
+    let sum = 0;
+
+    props.basket.forEach((item) => {
+      sum = sum + item.price * parseInt(item.quantity);
+    });
+
+    return sum;
+  }
 
   return (
     <div className="box">
@@ -22,7 +26,7 @@ function Basket(props) {
           <i className="fas fa-shopping-basket fa-2x"></i>
         </div>
       </div>
-      {/* {basketList} */}
+      {basketList} Total : £ {getTotal()}
     </div>
   );
 }
