@@ -15,6 +15,13 @@ function Basket(props) {
     return sum;
   }
 
+  const getTotal2 = props.basket.reduce(
+    (accumulator, currentValue) =>
+      accumulator + currentValue.price * parseInt(currentValue.quantity),
+    0
+  );
+
+  // dfghfdgh
   return (
     <div className="box">
       <div className="media">

@@ -8,11 +8,9 @@ function Shop() {
   const [basket, setBasket] = useState([]);
 
   function addToBasket(title, quantity, price) {
-    const tempBasket = basket;
     const newOrder = { title, quantity, price };
-    tempBasket.push(newOrder);
+    const tempBasket = [...basket, newOrder];
     setBasket(tempBasket);
-    console.log(basket);
   }
 
   const listOfProducts = products.map((prod, index) => (
