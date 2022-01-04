@@ -1,4 +1,3 @@
-import React from "react";
 function Basket(props) {
   const basketList = props.basket.map((item, index) => (
     <p key={index}>

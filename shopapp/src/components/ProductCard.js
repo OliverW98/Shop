@@ -19,7 +19,9 @@ function ProductCard(props) {
             <button
               type="submit"
               className="button is-primary is-outlined is-rounded"
-              onClick={() => props.addToBasket(props.title, quantity)}
+              onClick={() =>
+                props.addToBasket(props.title, quantity, props.price)
+              }
               name={props.title}
             >
               Add to Basket
