@@ -5,23 +5,12 @@ function Basket(props) {
     </p>
   ));
 
-  function getTotal() {
-    let sum = 0;
-
-    props.basket.forEach((item) => {
-      sum = sum + item.price * parseInt(item.quantity);
-    });
-
-    return sum;
-  }
-
-  const getTotal2 = props.basket.reduce(
+  const getTotal = props.basket.reduce(
     (accumulator, currentValue) =>
       accumulator + currentValue.price * parseInt(currentValue.quantity),
     0
   );
 
-  // dfghfdgh
   return (
     <div className="box">
       <div className="media">
@@ -32,7 +21,12 @@ function Basket(props) {
           <i className="fas fa-shopping-basket fa-2x"></i>
         </div>
       </div>
-      {basketList} Total : £ {getTotal()}
+      <hr />
+      {basketList}
+      <hr />
+      <div className="subtitle">
+        Total : £ {Math.round(getTotal * 100) / 100}
+      </div>
     </div>
   );
 }
