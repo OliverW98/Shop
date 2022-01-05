@@ -8,8 +8,17 @@ function Shop() {
   const [basket, setBasket] = useState([]);
 
   function addToBasket(title, quantity, price) {
-    const newOrder = { title, quantity, price };
-    const tempBasket = [...basket, newOrder];
+    let tempBasket = [...basket];
+    let itemFound = false;
+    tempBasket.forEach((item) => {
+      if (item.title === title) {
+        item.quantity = parseInt(item.quantity) + parseInt(quantity);
+      }
+    });
+    if (!itemFound) {
+      const newOrder = { title, quantity, price };
+      tempBasket = [...basket, newOrder];
+    }
     setBasket(tempBasket);
   }
 
