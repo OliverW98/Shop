@@ -12,10 +12,10 @@ app = express();
 server = http.createServer(app);
 
 // Configure to use statics.
-app.use(express.static(path.join(__dirname, "../public")));
+app.use(express.static(path.join(__dirname, "../build")));
 
 app.get("/", (req, res) => {
-  res.sendFile(__dirname + "/public/index.html");
+  res.send(res.sendFile(path.join(__dirname, "build", "index.html")));
 });
 
 // let io = socketIo(server);
