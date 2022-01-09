@@ -2,19 +2,21 @@ const express = require("express");
 const http = require("http");
 const path = require("path");
 const cors = require("cors");
-// const mongoose = require("mongoose");
+const mongoose = require("mongoose");
 
-const userSchema = require("./js/userSchema");
-const user = require("./js/user");
+let userSchema = require("./js/userSchema");
 
 // Intialise the app and server.
 app = express();
 
 app.use(cors());
-
+// Allows server to accept json
 app.use(express.json());
 
 server = http.createServer(app);
+// database connection
+let dbUrl = "mongodb://localhost:27017/shop";
+mongoose.connect(dbUrl, { useUnifiedTopology: true, useNewUrlParser: true });
 
 // Configure to use statics.
 // app.use(express.static(path.join(__dirname, "../build")));
@@ -34,16 +36,14 @@ app.get("/logInUser", (req, res) => {
 app.post("/signUpUser", (req, res) => {
   console.log("receiving data ...");
   console.log("body is ", req.body);
+  userSchema(req.body).save();
   res.send(req.body);
 });
 
-// let dbUrl = "mongodb://localhost:27017/chessGames";
-// mongoose.connect(dbUrl, { useUnifiedTopology: true, useNewUrlParser: true });
-
-// const connection = mongoose.connection;
-// connection.once("open", () => {
-//   console.log("im in");
-// });
+const connection = mongoose.connection;
+connection.once("open", () => {
+  console.log("im in");
+});
 
 server.listen(9000, function () {
   console.log("Listening on 9000");

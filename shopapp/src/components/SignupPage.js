@@ -1,5 +1,6 @@
 import { useState } from "react";
-function SignupPage() {
+import { useNavigate } from "react-router-dom";
+function SignupPage(props) {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
@@ -10,6 +11,8 @@ function SignupPage() {
   const [lastNameErr, setLastNamErr] = useState("");
   const [emailErr, setEmailErr] = useState("");
   const [passwordErr, setPasswordErr] = useState("");
+
+  const navigate = useNavigate();
 
   function checkSignUpDetails() {
     let valldSignUp = true;
@@ -44,32 +47,15 @@ function SignupPage() {
       valldSignUp = false;
     }
     if (valldSignUp) {
-      signUpUser();
-    }
-  }
+      const data = {
+        firstName: firstName,
+        lastName: lastName,
+        email: email,
+        password: password,
+      };
 
-  async function signUpUser() {
-    const data = {
-      firstName: firstName,
-      lastName: lastName,
-      email: email,
-      password: password,
-    };
-    const body = JSON.stringify(data);
-    console.log(body);
-
-    try {
-      const res = await fetch("http://localhost:9000/signUpUser", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body,
-      });
-      const json = await res.json();
-      console.log({ json });
-    } catch (e) {
-      console.error(e);
+      props.signUpUser(data);
+      navigate("/");
     }
   }
 

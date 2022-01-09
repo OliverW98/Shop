@@ -1,9 +1,10 @@
 const mongoose = require("mongoose");
 
 const userSchema = new mongoose.Schema({
-  whitePlayer: String,
-  blackPlayer: String,
-  moves: Array,
+  firstName: String,
+  lastName: String,
+  email: String,
+  password: String,
 });
 
 module.exports = mongoose.model("users", userSchema);
