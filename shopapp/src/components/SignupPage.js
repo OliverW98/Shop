@@ -33,13 +33,13 @@ function SignupPage(props) {
       valldSignUp = false;
     }
     if (password !== "") {
-      if (password.length > 8) {
+      if (password.length >= 8) {
         if (password !== conPassword) {
           setPasswordErr("Passwords do not match");
           valldSignUp = false;
         }
       } else {
-        setPasswordErr("Passowrd must be longer than 8 characters");
+        setPasswordErr("Passowrd must be at least 8 characters");
         valldSignUp = false;
       }
     } else {
@@ -47,15 +47,31 @@ function SignupPage(props) {
       valldSignUp = false;
     }
     if (valldSignUp) {
-      const data = {
-        firstName: firstName,
-        lastName: lastName,
-        email: email,
-        password: password,
-      };
+      signUpUser();
+    }
+  }
 
-      props.signUpUser(data);
-      navigate("/");
+  async function signUpUser() {
+    const data = {
+      firstName: firstName,
+      lastName: lastName,
+      email: email,
+      password: password,
+    };
+    try {
+      const res = await fetch("http://localhost:9000/signUpUser", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+      });
+      const json = await res.json();
+
+      console.log(json);
+      navigate("/Login");
+    } catch (e) {
+      console.error(e);
     }
   }
 

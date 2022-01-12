@@ -8,26 +8,15 @@ import Signup from "./components/SignupPage";
 function App() {
   const [user, setUser] = useState(null);
 
-  async function signUpUser(data) {
-    try {
-      const res = await fetch("http://localhost:9000/signUpUser", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(data),
-      });
-      const json = await res.json();
-
-      setUser({ ...user, ...json });
-    } catch (e) {
-      console.error(e);
-    }
+  function setLoggedInUser(userDetails) {
+    setUser({ ...user, ...userDetails });
   }
 
   function logOut() {
     setUser(null);
   }
+
+  console.log(user);
 
   return (
     <Router>
@@ -36,11 +25,11 @@ function App() {
         <div className="content">
           <Routes>
             <Route path="/" element={<Shop />} />
-            <Route path="/Login" element={<Login />} />
             <Route
-              path="/Signup"
-              element={<Signup signUpUser={signUpUser} />}
+              path="/Login"
+              element={<Login setLoggedInUser={setLoggedInUser} />}
             />
+            <Route path="/Signup" element={<Signup />} />
           </Routes>
         </div>
       </div>

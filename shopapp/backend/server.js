@@ -29,8 +29,27 @@ app.get("/", (req, res) => {
   res.send("hello world");
 });
 
-app.get("/logInUser", (req, res) => {
-  res.send({ userID: 1, userName: "Oliver Wilkes", email: "test@test" });
+// app.get("/logInUser", (req, res) => {
+//   userSchema.find({ firstName: "Ben", lastName: "Carter" }, (error, data) => {
+//     if (error) {
+//       console.log(error);
+//     } else {
+//       res.send(data);
+//     }
+//   });
+// });
+
+app.post("/logInUser", (req, res) => {
+  userSchema.find(
+    { email: req.body.email, password: req.body.password },
+    (error, data) => {
+      if (error) {
+        console.log(error);
+      } else {
+        res.send(data);
+      }
+    }
+  );
 });
 
 app.post("/signUpUser", (req, res) => {

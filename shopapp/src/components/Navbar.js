@@ -23,15 +23,19 @@ function Navbar(props) {
           <div className="navbar-item">
             <div className="buttons">
               {isUserSignIn() ? (
-                <button className="button is-primary" onClick={props.logOut}>
-                  Log out
-                </button>
+                <p class="navbar-item">
+                  <b>Welcome {props.user[0].firstName}</b>
+                </p>
               ) : (
                 <button className="button is-primary">
                   <Link to="/Signup">Sign up</Link>
                 </button>
               )}
-              {isUserSignIn() ? null : (
+              {isUserSignIn() ? (
+                <button className="button is-primary" onClick={props.logOut}>
+                  Log out
+                </button>
+              ) : (
                 <button className="button is-light">
                   <Link to="/Login">Log in</Link>
                 </button>
