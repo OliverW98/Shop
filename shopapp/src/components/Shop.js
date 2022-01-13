@@ -3,7 +3,7 @@ import ProductCard from "./ProductCard";
 import ProductList from "../ProductList";
 import Basket from "./Basket";
 
-function Shop() {
+function Shop(props) {
   const [products] = useState(ProductList);
   const [basket, setBasket] = useState([]);
 
@@ -17,7 +17,6 @@ function Shop() {
       }
     });
     if (!itemFound) {
-      console.log("cog");
       const newOrder = { title, quantity, price };
       tempBasket = [...basket, newOrder];
     }
@@ -33,6 +32,7 @@ function Shop() {
       price={prod.price}
       rating={prod.rating}
       addToBasket={addToBasket}
+      isUserSignedIn={props.isUserSignedIn}
     />
   ));
 
@@ -40,7 +40,11 @@ function Shop() {
     <div className="columns">
       <div className="column is-three-quarters">{listOfProducts}</div>
       <div className="column">
-        <Basket basket={basket} />
+        <Basket
+          basket={basket}
+          user={props.user}
+          isUserSignedIn={props.isUserSignedIn}
+        />
       </div>
     </div>
   );

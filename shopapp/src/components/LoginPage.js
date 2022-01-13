@@ -27,9 +27,6 @@ function LoginPage(props) {
         body: JSON.stringify(data),
       });
       const json = await res.json();
-      console.log(json);
-      console.log(json[0]._id);
-      console.log(json[0].email);
       props.setLoggedInUser(json);
       navigate("/");
     } catch (e) {

@@ -23,6 +23,7 @@ function ProductCard(props) {
                 props.addToBasket(props.title, quantity, props.price)
               }
               name={props.title}
+              disabled={!props.isUserSignedIn}
             >
               Add to Basket
             </button>
@@ -34,6 +35,7 @@ function ProductCard(props) {
               min="1"
               onChange={(e) => setQuantity(e.target.value)}
               value={quantity}
+              disabled={!props.isUserSignedIn}
             />
           </div>
         </div>

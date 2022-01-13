@@ -5,6 +5,7 @@ const cors = require("cors");
 const mongoose = require("mongoose");
 
 let userSchema = require("./js/userSchema");
+let orderSchema = require("./js/orderSchema");
 
 // Intialise the app and server.
 app = express();
@@ -53,9 +54,15 @@ app.post("/logInUser", (req, res) => {
 });
 
 app.post("/signUpUser", (req, res) => {
-  console.log("receiving data ...");
+  console.log("receiving user ...");
   console.log("body is ", req.body);
   userSchema(req.body).save();
+});
+
+app.post("/purchaseBasket", (req, res) => {
+  console.log("receiving order ...");
+  console.log("body is ", req.body);
+  orderSchema(req.body).save();
   res.send(req.body);
 });
 

@@ -1,13 +1,5 @@
 import { Link } from "react-router-dom";
 function Navbar(props) {
-  function isUserSignIn() {
-    if (props.user !== null) {
-      return true;
-    } else {
-      return false;
-    }
-  }
-
   return (
     <nav className="navbar" role="navigation" aria-label="main navigation">
       <div className="navbar-menu">
@@ -22,8 +14,8 @@ function Navbar(props) {
         <div className="navbar-end">
           <div className="navbar-item">
             <div className="buttons">
-              {isUserSignIn() ? (
-                <p class="navbar-item">
+              {props.isUserSignedIn ? (
+                <p className="navbar-item">
                   <b>Welcome {props.user[0].firstName}</b>
                 </p>
               ) : (
@@ -31,7 +23,7 @@ function Navbar(props) {
                   <Link to="/Signup">Sign up</Link>
                 </button>
               )}
-              {isUserSignIn() ? (
+              {props.isUserSignedIn ? (
                 <button className="button is-primary" onClick={props.logOut}>
                   Log out
                 </button>
