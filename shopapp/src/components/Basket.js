@@ -1,3 +1,5 @@
+import BasketItem from "./BasketItme";
+
 function Basket(props) {
   async function purchaseBasket() {
     let date = new Date();
@@ -22,9 +24,12 @@ function Basket(props) {
   }
 
   const basketList = props.basket.map((item, index) => (
-    <p key={index}>
-      {item.title} X {item.quantity}
-    </p>
+    <BasketItem
+      key={index}
+      item={item}
+      addToBasket={props.addToBasket}
+      removeFromBasket={props.removeFromBasket}
+    />
   ));
 
   const getTotal = props.basket.reduce(

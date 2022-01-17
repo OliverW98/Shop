@@ -23,6 +23,21 @@ function Shop(props) {
     setBasket(tempBasket);
   }
 
+  function removeFromBasket(title, quantity, price) {
+    let tempBasket = [...basket];
+    tempBasket.forEach((item, index) => {
+      if (item.title === title) {
+        if (item.quantity === 1) {
+          tempBasket.splice(index, 1);
+        } else {
+          item.quantity = parseInt(item.quantity) - parseInt(quantity);
+        }
+      }
+    });
+
+    setBasket(tempBasket);
+  }
+
   const listOfProducts = products.map((prod, index) => (
     <ProductCard
       key={index}
@@ -44,6 +59,8 @@ function Shop(props) {
           basket={basket}
           user={props.user}
           isUserSignedIn={props.isUserSignedIn}
+          addToBasket={addToBasket}
+          removeFromBasket={removeFromBasket}
         />
       </div>
     </div>
