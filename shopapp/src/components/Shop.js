@@ -1,11 +1,41 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import ProductCard from "./ProductCard";
-import ProductList from "../ProductList";
 import Basket from "./Basket";
 
+const initialData = {
+  data: [],
+  loading: true,
+  error: false,
+};
+
 function Shop(props) {
-  const [products] = useState(ProductList);
+  const [products, setProducts] = useState(initialData);
   const [basket, setBasket] = useState([]);
+
+  useEffect(() => {
+    const loadProducts = async () => {
+      try {
+        const res = await fetch("http://localhost:9000/getProducts");
+        const json = await res.json();
+        const newState = {
+          data: json,
+          loading: false,
+          error: false,
+        };
+        setProducts(newState);
+      } catch (e) {
+        console.log(e);
+        const newState = {
+          data: undefined,
+          loading: false,
+          error: true,
+        };
+        setProducts(newState);
+      }
+    };
+
+    loadProducts();
+  }, []);
 
   function addToBasket(title, quantity, price) {
     let tempBasket = [...basket];
@@ -38,7 +68,7 @@ function Shop(props) {
     setBasket(tempBasket);
   }
 
-  const listOfProducts = products.map((prod, index) => (
+  const listOfProducts = products.data.map((prod, index) => (
     <ProductCard
       key={index}
       title={prod.title}
@@ -50,6 +80,14 @@ function Shop(props) {
       isUserSignedIn={props.isUserSignedIn}
     />
   ));
+
+  if (products.error) {
+    return <div>Something went wrong!</div>;
+  }
+
+  if (products.loading) {
+    return <div>Data loading...</div>;
+  }
 
   return (
     <div className="columns">

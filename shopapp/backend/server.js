@@ -4,6 +4,7 @@ const path = require("path");
 const cors = require("cors");
 const mongoose = require("mongoose");
 
+let productSchema = require("./js/productSchema");
 let userSchema = require("./js/userSchema");
 let orderSchema = require("./js/orderSchema");
 
@@ -30,15 +31,15 @@ app.get("/", (req, res) => {
   res.send("hello world");
 });
 
-// app.get("/logInUser", (req, res) => {
-//   userSchema.find({ firstName: "Ben", lastName: "Carter" }, (error, data) => {
-//     if (error) {
-//       console.log(error);
-//     } else {
-//       res.send(data);
-//     }
-//   });
-// });
+app.get("/getProducts", (req, res) => {
+  productSchema.find({}, (error, data) => {
+    if (error) {
+      console.log(error);
+    } else {
+      res.send(data);
+    }
+  });
+});
 
 app.post("/logInUser", (req, res) => {
   userSchema.find(
