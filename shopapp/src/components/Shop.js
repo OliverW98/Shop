@@ -37,26 +37,26 @@ function Shop(props) {
     loadProducts();
   }, []);
 
-  function addToBasket(title, quantity, price) {
+  function addToBasket(title, quantity, price, id) {
     let tempBasket = [...basket];
     let itemFound = false;
     tempBasket.forEach((item) => {
-      if (item.title === title) {
+      if (item.id === id) {
         itemFound = true;
         item.quantity = parseInt(item.quantity) + parseInt(quantity);
       }
     });
     if (!itemFound) {
-      const newOrder = { title, quantity, price };
+      const newOrder = { title, quantity, price, id };
       tempBasket = [...basket, newOrder];
     }
     setBasket(tempBasket);
   }
 
-  function removeFromBasket(title, quantity, price) {
+  function removeFromBasket(id, quantity) {
     let tempBasket = [...basket];
     tempBasket.forEach((item, index) => {
-      if (item.title === title) {
+      if (item.id === id) {
         if (item.quantity === 1) {
           tempBasket.splice(index, 1);
         } else {
@@ -71,6 +71,7 @@ function Shop(props) {
   const listOfProducts = products.data.map((prod, index) => (
     <ProductCard
       key={index}
+      id={prod._id}
       title={prod.title}
       type={prod.type}
       description={prod.description}

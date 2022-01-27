@@ -20,7 +20,7 @@ function ProductCard(props) {
               type="submit"
               className="button is-primary is-outlined is-rounded"
               onClick={() =>
-                props.addToBasket(props.title, quantity, props.price)
+                props.addToBasket(props.title, quantity, props.price, props.id)
               }
               name={props.title}
               disabled={!props.isUserSignedIn}

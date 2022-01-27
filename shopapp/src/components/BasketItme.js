@@ -3,9 +3,7 @@ function BasketItem(props) {
     <div className="media">
       <div className="media-left">
         <i
-          onClick={() =>
-            props.removeFromBasket(props.item.title, 1, props.item.price)
-          }
+          onClick={() => props.removeFromBasket(props.item.id, 1)}
           className="fas fa-minus"
         ></i>
       </div>
@@ -17,7 +15,12 @@ function BasketItem(props) {
       <div className="media-right">
         <i
           onClick={() =>
-            props.addToBasket(props.item.title, 1, props.item.price)
+            props.addToBasket(
+              props.item.title,
+              1,
+              props.item.price,
+              props.item.id
+            )
           }
           className="fas fa-plus"
         ></i>
